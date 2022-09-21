@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function __invoke()
     {
-        $this->middleware('auth');
+
+        $categories = Category::tree()->get()->toTree();
+
+        return view('home', [
+            'categories' => $categories
+        ]);
+
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
 }
