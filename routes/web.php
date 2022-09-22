@@ -16,6 +16,8 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', HomeController::class);
 
+Route::get('products/{product:slug}', \App\Http\Controllers\ProductShowController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
